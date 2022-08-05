@@ -129,6 +129,7 @@ abstract class ImagePickerListener {
     imagePicker.init();
 
 5. add this inside aplication section in AndroidManifest.xml
+
     <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
@@ -136,9 +137,4 @@ abstract class ImagePickerListener {
 
 6. call imagePicker. to use the function
     imagePicker.showDialog(context);
-
-
-
-
-
 */
