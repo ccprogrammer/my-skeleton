@@ -135,6 +135,18 @@ abstract class ImagePickerListener {
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-6. call imagePicker. to use the function
+6. Go to your app-level build.grade android\app\build.gradle then Scroll down to/inside 
+   "android{ " paste this code carefully(not disturbing any other brakets.)
+
+   lintOptions {
+            disable 'InvalidPackage'
+            disable "Instantiatable"
+            checkReleaseBuilds false
+            abortOnError false
+        }
+
+
+
+7. call imagePicker. to use the function
     imagePicker.showDialog(context);
 */
