@@ -7,7 +7,6 @@ import 'package:my_skeleton/ui/Components/additional_form/text_box.dart';
 import 'package:my_skeleton/ui/Components/additional_form/text_box_password.dart';
 import 'package:my_skeleton/ui/Components/additional_form/text_box_suara.dart';
 
-
 class AdditionalForm extends StatefulWidget {
   const AdditionalForm({Key key, this.data, this.index}) : super(key: key);
   final int index;
@@ -34,7 +33,7 @@ class _AdditionalFormState extends State<AdditionalForm> {
 
     if (widget.data['type'] == 'text_box') {
       return CustomTextBox(
-        data: widget.data,
+        label: widget.data['label'],
       );
     }
 
@@ -56,7 +55,7 @@ class _AdditionalFormState extends State<AdditionalForm> {
       );
     }
 
-      if (widget.data['type'] == 'image_box') {
+    if (widget.data['type'] == 'image_box') {
       return CustomImagePicker(
         data: widget.data,
       );
