@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_skeleton/constants/constants.dart';
 
 class CustomTextArea extends StatefulWidget {
-  const CustomTextArea({Key key, this.data}) : super(key: key);
-  final dynamic data;
+  const CustomTextArea({
+    Key key,
+    this.label,
+    this.hintText,
+    this.controller,
+    this.onChangeListener,
+  }) : super(key: key);
+  final String label;
+  final String hintText;
+  final TextEditingController controller;
+  final Function onChangeListener;
 
   @override
   State<CustomTextArea> createState() => _CustomTextAreaState();
@@ -17,8 +26,8 @@ class _CustomTextAreaState extends State<CustomTextArea> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Text Area :',
+          Text(
+            widget.label ?? 'Text Area :',
             style: TextStyle(fontWeight: Constants.medium),
           ),
           Container(
@@ -31,11 +40,12 @@ class _CustomTextAreaState extends State<CustomTextArea> {
                 border: Border.all(color: Colors.black45)),
             child: Focus(
               onFocusChange: (focus) {},
-              child: const TextField(
+              child: TextField(
                 expands: true,
                 maxLines: null,
+                controller: widget.controller,
                 decoration: InputDecoration(
-                  hintText: 'Input Text . . .',
+                  hintText: widget.hintText ?? ' . . .',
                   hintStyle: TextStyle(),
                   border: InputBorder.none,
                 ),

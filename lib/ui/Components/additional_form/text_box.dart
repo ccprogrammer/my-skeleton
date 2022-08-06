@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:my_skeleton/constants/constants.dart';
 
 class CustomTextBox extends StatefulWidget {
-  const CustomTextBox(
-      {Key key,
-      this.label,
-      this.controller,
-      this.onChangeListener,
-      this.hintText})
-      : super(key: key);
+  const CustomTextBox({
+    Key key,
+    this.label,
+    this.hintText,
+    this.controller,
+    this.onChangeListener,
+  }) : super(key: key);
   final String label;
   final String hintText;
   final TextEditingController controller;
@@ -43,7 +43,7 @@ class _CustomTextBoxState extends State<CustomTextBox> {
                 child: TextField(
                   controller: widget.controller,
                   decoration: InputDecoration(
-                    hintText: '${widget.hintText} . . .',
+                    hintText: widget.hintText ?? '. . .',
                     border: InputBorder.none,
                   ),
                   onChanged: (value) {

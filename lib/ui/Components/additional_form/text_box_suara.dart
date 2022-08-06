@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_skeleton/constants/constants.dart';
 
 class CustomTextBox2 extends StatefulWidget {
-  const CustomTextBox2({Key key, this.data}) : super(key: key);
-  final dynamic data;
+  const CustomTextBox2({
+    Key key,
+    this.label,
+    this.hintText,
+    this.controller,
+    this.onChangeListener,
+  }) : super(key: key);
+  final String label;
+  final String hintText;
+  final TextEditingController controller;
+  final Function onChangeListener;
 
   @override
   State<CustomTextBox2> createState() => _CustomTextBox2State();
@@ -17,12 +26,12 @@ class _CustomTextBox2State extends State<CustomTextBox2> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Text Box 2 :',
+          Text(
+            widget.label ?? 'Text Box 2 :',
             style: TextStyle(fontWeight: Constants.medium),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 12,bottom: 12),
+            margin: const EdgeInsets.only(top: 12, bottom: 12),
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
             height: 50.0,
             decoration: BoxDecoration(
@@ -34,7 +43,7 @@ class _CustomTextBox2State extends State<CustomTextBox2> {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Cth. 1000',
+                      hintText: widget.hintText ?? 'Cth. 1000',
                       hintStyle: TextStyle(),
                       border: InputBorder.none,
                     ),

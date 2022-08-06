@@ -32,27 +32,19 @@ class _AdditionalFormState extends State<AdditionalForm> {
     }
 
     if (widget.data['type'] == 'text_box') {
-      return CustomTextBox(
-        label: widget.data['label'],
-      );
+      return CustomTextBox();
     }
 
     if (widget.data['type'] == 'text_vote') {
-      return CustomTextBox2(
-        data: widget.data,
-      );
+      return CustomTextBox2();
     }
 
     if (widget.data['type'] == 'text_password') {
-      return CustomTextBox3(
-        data: widget.data,
-      );
+      return CustomTextBox3();
     }
 
     if (widget.data['type'] == 'text_area') {
-      return CustomTextArea(
-        data: widget.data,
-      );
+      return CustomTextArea();
     }
 
     if (widget.data['type'] == 'image_box') {

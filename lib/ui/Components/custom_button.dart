@@ -50,7 +50,7 @@ class _CustomButtonState extends State<CustomButton> {
             widget.label,
             style: TextStyle(
               color: widget.textColor,
-              fontSize: 28,
+              fontSize: 18,
               fontWeight: Constants.medium,
             ),
           ),

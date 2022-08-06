@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_skeleton/constants/constants.dart';
 
 class CustomTextBox3 extends StatefulWidget {
-  const CustomTextBox3({Key key, this.data}) : super(key: key);
-  final dynamic data;
+  const CustomTextBox3({
+    Key key,
+    this.label,
+    this.hintText,
+    this.controller,
+    this.onChangeListener,
+  }) : super(key: key);
+  final String label;
+  final String hintText;
+  final TextEditingController controller;
+  final Function onChangeListener;
 
   @override
   State<CustomTextBox3> createState() => _CustomTextBox3State();
@@ -19,8 +28,8 @@ class _CustomTextBox3State extends State<CustomTextBox3> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Text Box Password :',
+          Text(
+            widget.label ?? 'Text Box Password :',
             style: TextStyle(fontWeight: Constants.medium),
           ),
           Container(
@@ -36,6 +45,7 @@ class _CustomTextBox3State extends State<CustomTextBox3> {
                 onFocusChange: (focus) {},
                 child: TextField(
                   obscureText: passwordVisible,
+                  controller: widget.controller,
                   enableSuggestions: false,
                   autocorrect: false,
                   decoration: InputDecoration(
@@ -51,9 +61,12 @@ class _CustomTextBox3State extends State<CustomTextBox3> {
                             : Icons.visibility,
                       ),
                     ),
-                    hintText: 'Password',
+                    hintText: widget.hintText ?? '. . .',
                     border: InputBorder.none,
                   ),
+                  onChanged: (value) {
+                    widget.onChangeListener(value);
+                  },
                 ),
               ),
             ),
