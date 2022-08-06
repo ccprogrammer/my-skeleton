@@ -34,6 +34,7 @@ class Helper {
     text = '',
     icon = Icons.check,
     onClose,
+    onDismiss,
     isBorder = true,
     iconSize = 32.0,
   }) {
@@ -94,7 +95,102 @@ class Helper {
               ],
             ),
           );
-        }).then((value) => onClose());
+        }).then((value) => onDismiss());
+  }
+
+  alertMore({
+    title = 'Warning !',
+    subtitle = 'Are you sure?',
+    onClose,
+    onDismiss,
+    onYes,
+  }) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => Container(
+        width: MediaQuery.of(context).size.width * 0.4,
+        child: AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 12),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 12),
+                Text(
+                  subtitle,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: 44,
+                      width: 100,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          onClose();
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          backgroundColor: Colors.red,
+                        ),
+                        child: Text(
+                          'Close',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 44,
+                      width: 100,
+                      child: TextButton(
+                        onPressed: () {
+                          onYes();
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          backgroundColor: Colors.blue,
+                        ),
+                        child: Text(
+                          'Yes',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ).then(
+      (value) => onDismiss(),
+    );
   }
 
   // === share flutter_share: ^2.0.0
