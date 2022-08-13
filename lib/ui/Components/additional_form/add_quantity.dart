@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_skeleton/constants/constants.dart';
 
 class AddQuantity extends StatefulWidget {
   const AddQuantity({Key key, this.label}) : super(key: key);
@@ -11,7 +10,6 @@ class AddQuantity extends StatefulWidget {
 
 class _AddQuantityState extends State<AddQuantity> {
   int stock = 0;
-
   handleAddQuantity({isAdd = true}) {
     if (isAdd) {
       setState(() {
@@ -29,16 +27,60 @@ class _AddQuantityState extends State<AddQuantity> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    inputNumber() {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Input Number',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: TextField(
+                    controller: controller,
+                    maxLength: 3,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      hintText: '$stock',
+                      hintStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
+                    onChanged: (value) {
+                      stock = int.tryParse(value) ?? 0;
+                    },
+                    onEditingComplete: () {
+                      Navigator.pop(context);
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+
     return Container(
-      margin: EdgeInsets.fromLTRB(16, 12, 16, 0),
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       child: Row(
         children: [
           Expanded(
             child: Text(
               widget.label ?? 'STOCK',
-              style: TextStyle(
-                fontWeight: Constants.medium,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
           GestureDetector(
@@ -52,13 +94,18 @@ class _AddQuantityState extends State<AddQuantity> {
                 color: Colors.blueAccent.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.remove),
+              child: const Icon(Icons.remove),
             ),
           ),
-          Container(
-            width: 30,
-            child: Center(
-              child: Text('$stock'),
+          GestureDetector(
+            onTap: () {
+              inputNumber();
+            },
+            child: SizedBox(
+              width: 30,
+              child: Center(
+                child: Text('$stock'),
+              ),
             ),
           ),
           GestureDetector(
@@ -72,7 +119,7 @@ class _AddQuantityState extends State<AddQuantity> {
                 color: Colors.blueAccent.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             ),
           ),
         ],
